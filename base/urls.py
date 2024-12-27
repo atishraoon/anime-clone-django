@@ -20,6 +20,7 @@ urlpatterns = [
     path('profile/',views.BaseProfile.as_view(), name='profile'), 
     path('profile_edit/',views.BaseProfileEdit.as_view(), name='profile_edit'), 
     path('remove-all-anime/', views.RemoveAllAnime.as_view(), name='remove_all_anime'),
+    path('remove-anime/', views.RemoveAnime.as_view(), name='remove_anime'),
     path('add-anime/', views.AddAnime.as_view(), name='add_anime'),
 
  

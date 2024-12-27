@@ -25,6 +25,34 @@ from base.models import *
 
 
 # -------------------------------------------------------------------------------------------------------
+# remvoe one anime from anime list
+class RemoveAnime(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        anime_id = request.POST.get('anime_id')
+
+        # Ensure anime_id is valid
+        try:
+            anime = Anime.objects.get(id=anime_id)
+        except Anime.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Anime not found."}, status=404)
+
+        # Remove the specific anime from the user's AnimeList
+        deleted_count, _ = AnimeList.objects.filter(user=user, anime=anime).delete()
+
+        # Return success response
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            if deleted_count > 0:
+                return JsonResponse({"success": True})
+            else:
+                return JsonResponse({"success": False, "error": "Anime not found in your list."}, status=404)
+        else:
+            return redirect(reverse('profile'))
+
+
+
+
+
 # remove all the watchlist inside associated with logined profile 
 class RemoveAllAnime(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):

@@ -117,12 +117,31 @@
 		<div class="anime-grid-anime">
 		{% for anime in anime_list %}
 		<!-- Anime Card 1 -->
-			<a href="{% url 'anime-detail' title=anime.anime.title %}" style="text-decoration: none; color: #fff;">
+			
 			<div class="anime-card-anime">
+			<a href="{% url 'anime-detail' title=anime.anime.title %}" style="text-decoration: none; color: #fff;">
 			<img src="{{ anime.anime.picture.url }}" alt="Anime 1">
-			<h3>{{anime.anime.title}} </h3>
-			</div>
 			</a>
+			<h3>{{anime.anime.title}} </h3>
+			
+
+			<!-- actions -->
+			<div style="display: flex; justify-content: center;">
+
+				<form method="post" action="{% url 'remove_anime' %}">
+                {% csrf_token %}  
+                <input type="text" name="anime_id" value="{{anime.anime.id}}" required style="display: none;">
+                <button type="submit">remove</button>
+            	</form>
+
+
+			</div>
+
+			
+
+
+			</div>
+			
 		{% empty %}
             <li>No anime found in your list.</li>
         {% endfor %}
