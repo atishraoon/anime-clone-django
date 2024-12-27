@@ -1,0 +1,173 @@
+{% load static %}
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ anime.title }} - Watch</title>
+
+	<style>
+		
+		.all-list-anime h1 {
+		  text-align: center;
+		  margin: 20px 0;
+		}
+
+		/* Grid container styling */
+		.anime-grid-anime {
+		  display: grid;
+		  grid-template-columns: repeat(5, 1fr); /* Default: 5 cards in one row */
+		  gap: 20px;
+		  padding: 20px;
+		}
+
+		.anime-card-anime {
+		  background-color: #222;
+		  border-radius: 8px;
+		  overflow: hidden;
+		  text-align: center;
+		  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+		  transition: transform 0.3s ease;
+		}
+
+		.anime-card-anime:hover {
+		  transform: scale(1.05);
+		}
+
+		.anime-card-anime img {
+		  width: 100%;
+		  height: auto;
+		  display: block;
+		}
+
+		.anime-card-anime h3 {
+		  font-size: 1rem;
+		  padding: 10px;
+		} 
+
+		/* Responsive grid: adjust to 2 columns for small screens */
+		@media (max-width: 768px) {
+		  .anime-grid-anime {
+		    grid-template-columns: repeat(2, 1fr); /* 2 cards in a row */
+		  }
+		}
+
+		@media (max-width: 480px) {
+		  .anime-grid-anime {
+		    grid-template-columns: 1fr; /* 1 card per row for very small screens */
+		  }
+		}
+
+
+/*		anime details css*/
+		
+		/*info*/
+		.anime-info-d{
+		  margin: 20px;
+		}
+		.anime-card-d{
+		  display: flex;
+		}
+		.anime-image-d{
+		  height: auto;
+		  width: auto;
+		  padding-right: 3rem;
+		}
+
+		.anime-details-d h1{
+		  padding-top: 1em;
+		  padding-bottom: 1em;
+		}
+
+		.anime-meta-d span {
+		  background-color: lightgray; 
+		  color: black;
+		  border-radius: 3px;
+		  font-weight: bold; 
+		}
+
+		.anime-meta-d {
+		  padding-top: 1em;
+		  padding-bottom: 1em;
+		}
+		.watch-info-d{
+		  padding-top: 0.5em;
+		  padding-bottom: 0.5em;
+		}
+
+		.watch-info-d button{
+		  padding: 10px;
+		  border-radius: 10px;
+		}
+ 
+		@media (max-width: 768px) {  
+		  .anime-card-d{
+		    flex-direction: column; 
+		  }
+		}
+
+	</style>
+</head>
+<body> 
+
+	<!-- nav bar -->
+	{% include 'b/nav.html' %}
+
+	<!-- anime list -->
+	{% include 'b/watch.html' %}
+
+	<!-- anime details -->
+	<section class="anime-info-d">
+
+	<div class="anime-card-d">
+	    <!-- Left Section: Anime Thumbnail -->
+	    <div class="anime-image-d">
+	        <img src="{{ anime.picture.url }}" alt="Anime 1">
+	    </div>
+	    
+	    <!-- Middle Section: Anime Details --> 
+	    <div class="anime-details-d">
+	        <h1>{{anime.title}}</h1>
+	        <div class="anime-meta-d" style="text-transform: uppercase;">
+            <span class="rating">PG-13</span>
+            <span class="hd">HD</span>
+            <span class="views">{{anime.uploaded_episodes}}</span>
+            <span class="episodes">{{anime.total_episodes}}</span>
+            <span class="duration">{{anime.category}} · {{anime.interval}}</span>
+        </div>
+	        <p class="anime-description-d">
+	            {{anime.description}}
+	        </p>
+	        <div class="watch-info-d">
+	            <a href="{% url 'anime-detail' title=anime.title %}"><button class="view-details-d">detail</button></a>
+	            
+	        </div> 
+
+	    </div> 
+	</div>
+	</section>
+
+
+	<!-- other anime recommandations -->
+	<section class="all-list-anime">
+		<h1>Recommanded Anime</h1>
+		<div class="anime-grid-anime">
+		{% if allanimes %}
+		{% for anime in allanimes %} 
+		<!-- Anime Card 1 -->
+			<a href="{% url 'anime-detail' title=anime.title %}" style="text-decoration: none; color: #fff;">
+			<div class="anime-card-anime">
+			<img src="{{ anime.picture.url }}" alt="Anime 1">
+			<h3>{{anime.title}}</h3> 
+			</div> 
+			</a>
+		{% endfor %}
+		{% endif %}
+
+		</div>
+	</section>
+
+
+</body>
+</html>

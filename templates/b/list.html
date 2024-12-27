@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+
+
+<section class="all-list">
+   <h1>Recommanded Anime</h1>
+<div class="anime-grid">
+  {% if anime %}
+  {% for anime in anime %} 
+  <!-- Anime Card 1 -->
+  <a href="{% url 'anime-detail' title=anime.title %}" style="text-decoration: none; color: #fff;">
+    <div class="anime-card">
+    <img src="{{ anime.picture.url }}" alt="Anime 1">
+    <h3>{{anime.title}}</h3> 
+  </div> 
+  </a>
+  {% endfor %}
+  {% endif %}
+
+
+</div>
+</section>
+
+
+
+

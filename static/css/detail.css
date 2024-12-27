@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
+}
+
+
+/*info*/
+.anime-info{
+  margin: 20px;
+}
+.anime-card{
+  display: flex;
+}
+.anime-image{
+  height: auto;
+  width: auto;
+  padding-right: 3rem;
+}
+
+.anime-details h1{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.anime-meta span {
+  background-color: lightgray; 
+  color: black;
+  border-radius: 3px;
+  font-weight: bold; 
+}
+
+.anime-meta {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.watch-info{
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.watch-info button{
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+
+@media (max-width: 768px) {  
+  .anime-card{
+    flex-direction: column; 
+  }
+}

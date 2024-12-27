@@ -1,0 +1,70 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/nav.css' %}">
+  <header> 
+    <div class="navbar">
+      <a href="/" style="text-decoration: none;"><h1>!anime</h1></a>
+       
+    
+
+      <div style="display: flex;">
+          <div class="search-container">
+            <form method="GET" action="{% url 'search' %}">
+            <input type="text" class="search-input" id="first-search" name="q" value="{{ query }}" placeholder="Search Anime...">
+            <button  class="search-toggle" id="search-toggle">Search</button>
+            </form> 
+             <button  class="search-toggle search-btn" id="search-btn">Search</button>   
+          </div>
+  
+
+
+
+          {% if request.user.is_authenticated %}
+          <a href="{% url 'logout' %}"> 
+            <div class="nav-buttons"> 
+            <button>logout</button>
+          </div>  
+          </a> 
+          <a href="{% url 'profile' %}">
+            <div class="nav-buttons"> 
+            <button>profile</button>
+          </div>  
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}">
+            <div class="nav-buttons"> 
+            <button>login</button>
+          </div>  
+          </a>
+          {% endif %}
+
+      </div>
+    </div>
+
+   
+  </header>
+
+<script>
+  const searchBtn = document.getElementById('search-btn');
+  const mobilesearch = document.getElementById('first-search')
+
+  // Function to toggle visibility
+  const toggleSearch = () => {
+    if (mobilesearch.style.display === "block") {
+      mobilesearch.style.display = "none";
+    } else {
+      mobilesearch.style.display = "block";
+      searchBtn.style.display = "none"
+    }
+  };
+
+  // Handle click event
+  searchBtn.addEventListener('click', toggleSearch);
+
+  // Handle "Enter" keypress inside the second search input
+  mobilesearch.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+      toggleSearch();
+    }
+  });
+</script>
+
