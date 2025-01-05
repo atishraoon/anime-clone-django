@@ -1,6 +1,6 @@
 # Anime Clone Django
 
-Welcome to the Anime Clone Django project! This is a web application built using Django that allows users to explore and enjoy a variety of anime content.
+Welcome to the Anime Clone Django project! . This is a web application built using Django that allows users to explore and enjoy a variety of anime content.
 
 ## Website Link
 
