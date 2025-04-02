@@ -158,8 +158,7 @@ def search(request):
   
 # -------------------------------------------------------------------------------------------------------
 
-
-class BaseAnimeWatch(LoginRequiredMixin,DetailView):
+class BaseAnimeWatch(DetailView):
     model = Anime
     template_name = 'base/watch.html'
     context_object_name = 'anime'
