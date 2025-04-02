@@ -43,8 +43,8 @@ class Episode(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name="episodes")
     name = models.CharField(max_length=200)
     episode_no = models.CharField(max_length=2000,null=True, blank=True) 
-    video_url = models.URLField()
-
+    video_url = models.URLField(max_length=4000)
+ 
     def __str__(self):
         return f"{self.anime.title} - {self.name}"
 
