@@ -68,3 +68,41 @@
   });
 </script>
 
+
+
+<script>
+  // Prevent right-click, F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+  document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+  });
+
+  document.addEventListener('keydown', function(e) {
+      // Disable F12
+      if (e.keyCode === 123) {
+          e.preventDefault();
+      }
+      // Disable Ctrl+Shift+I (Chrome, Firefox, Edge)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+          e.preventDefault();
+      }
+      // Disable Ctrl+Shift+J (Chrome)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+          e.preventDefault();
+      }
+      // Disable Ctrl+U
+      if (e.ctrlKey && e.keyCode === 85) {
+          e.preventDefault();
+      }
+      // Disable Ctrl+Shift+C (Chrome)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+          e.preventDefault();
+      }
+  });
+
+  
+</script>
+ 
+
+
+
+
