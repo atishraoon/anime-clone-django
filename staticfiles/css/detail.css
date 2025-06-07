@@ -49,14 +49,7 @@ body {
   padding: 10px;
   border-radius: 10px;
 }
-
-.watch-anime , .add-anime {
-  background-color: #ff78b6;
-  color: white; 
-  font-weight: bold;
-}
-
-
+  
 
 @media (max-width: 768px) {  
   .anime-card{
