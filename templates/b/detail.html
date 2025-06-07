@@ -23,15 +23,15 @@
             <span class="duration">{{anime.category}} · {{anime.interval}}</span>
         </div>
         <p class="anime-description">
-            {{anime.description}}
+            {{anime.description}} 
         </p>
         <div class="watch-info" style="display: flex;"> 
-            <a href="{% url 'watch' title=anime.title episode_no=1 %}"><button class="view-details">Watch</button></a>
+            <a href="{% url 'watch' title=anime.title episode_no=1 %}" ><button class="view-details watch-anime">Watch</button></a>
             &ensp;
             <form method="post" action="{% url 'add_anime' %}">
                 {% csrf_token %} 
                 <input type="text" name="anime_id" value="{{anime.id}}" required style="display: none;">
-                <button type="submit">Add Anime</button>
+                <button type="submit" class="add-anime">Add Anime</button>
             </form>          
         </div> 
 
