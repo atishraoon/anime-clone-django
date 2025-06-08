@@ -11,7 +11,6 @@ You can access the live website [here](https://satish881.pythonanywhere.com).
 - **User Authentication**: Secure login and registration for users.
 - **Anime Database**: Browse a comprehensive database of anime titles.
 - **Search Functionality**: Easily find your favorite anime using the search feature.
-- **User Reviews**: Users can leave reviews and ratings for anime.
 - **auto play**: 
 - **Watchlist Management**: 
   - **Add to Watchlist**: Users can add anime titles to their personal watchlist for easy access.
