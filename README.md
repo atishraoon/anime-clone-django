@@ -4,7 +4,7 @@ Welcome to the Anime Clone Django project! . This is a web application built usi
 
 ## Website Link
 
-You can access the live website [here](https://satish881.pythonanywhere.com).
+You can access the live website [!anime](https://satish881.pythonanywhere.com).
 
 ## Features
 
