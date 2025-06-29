@@ -1,0 +1,50 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}"> 
+
+<style>
+    .watch-anime , .add-anime {
+  background-color: #ff78b6;
+  color: white; 
+  font-weight: bold;
+}
+
+</style>
+
+<!-- details of anime  -->
+<section class="anime-info">
+
+<div class="anime-card"> 
+    <!-- Left Section: Anime Thumbnail -->
+    <div class="anime-image">
+        <img src="{{ anime.picture.url }}" alt="Anime 1">
+    </div>
+    
+    <!-- Middle Section: Anime Details --> 
+    <div class="anime-details">
+        <h1>{{anime.title}}</h1>
+        <div class="anime-meta" style="text-transform: uppercase;">
+            <span class="rating">PG-13</span>
+            <span class="hd">HD</span>
+            <span class="views">{{anime.uploaded_episodes}}</span>
+            <span class="episodes">{{anime.total_episodes}}</span>
+            <span class="duration">{{anime.category}} · {{anime.interval}}</span>
+        </div>
+        <p class="anime-description">
+            {{anime.description}} 
+        </p>
+        <div class="watch-info" style="display: flex;"> 
+            <a href="{% url 'watch' title=anime.title episode_no=1 %}" ><button class="view-details watch-anime">Watch</button></a>
+            &ensp;
+            <form method="post" action="{% url 'add_anime' %}">
+                {% csrf_token %} 
+                <input type="text" name="anime_id" value="{{anime.id}}" required style="display: none;">
+                <button type="submit" class="add-anime">Add Anime</button>
+            </form>          
+        </div> 
+
+    </div> 
+</div>
+</section>
+
+
