@@ -1,0 +1,94 @@
+{% load static %}
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>{{anime.title}}</title>
+
+	<style>
+		
+		.all-list-anime h1 {
+		  text-align: center;
+		  margin: 20px 0;
+		}
+
+		/* Grid container styling */
+		.anime-grid-anime {
+		  display: grid;
+		  grid-template-columns: repeat(5, 1fr); /* Default: 5 cards in one row */
+		  gap: 20px;
+		  padding: 20px;
+		}
+
+		.anime-card-anime {
+		  background-color: #222;
+		  border-radius: 8px;
+		  overflow: hidden;
+		  text-align: center;
+		  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+		  transition: transform 0.3s ease;
+		}
+
+		.anime-card-anime:hover {
+		  transform: scale(1.05);
+		}
+
+		.anime-card-anime img {
+		  width: 100%;
+		  height: auto;
+		  display: block;
+		}
+
+		.anime-card-anime h3 {
+		  font-size: 1rem;
+		  padding: 10px;
+		} 
+
+		/* Responsive grid: adjust to 2 columns for small screens */
+		@media (max-width: 768px) {
+		  .anime-grid-anime {
+		    grid-template-columns: repeat(2, 1fr); /* 2 cards in a row */
+		  }
+		}
+
+		@media (max-width: 480px) {
+		  .anime-grid-anime {
+		    grid-template-columns: 1fr; /* 1 card per row for very small screens */
+		  }
+		}
+
+	</style>
+	
+</head>
+<body> 
+
+	<!-- nav bar -->
+	{% include 'b/nav.html' %}
+
+	<!-- detail list -->
+	{% include 'b/detail.html' %}
+
+	<!-- other anime recommandations -->
+	<section class="all-list-anime">
+		<h1>Other Anime</h1>
+		<div class="anime-grid-anime">
+		{% if allanimes %}
+		{% for anime in allanimes %} 
+		<!-- Anime Card 1 -->
+			<a href="{% url 'anime-detail' title=anime.title %}" style="text-decoration: none; color: #fff;">
+			<div class="anime-card-anime">
+			<img src="{{ anime.picture.url }}" alt="Anime 1">
+			<h3>{{anime.title}}</h3> 
+			</div> 
+			</a>
+		{% endfor %}
+		{% endif %}
+
+		</div>
+	</section>
+
+</body>
+</html>
