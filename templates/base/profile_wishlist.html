@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>profile</title>
+
+	<style>
+
+		.all-list-anime h1 {
+		  text-align: center;
+		  margin: 20px 0;
+		}
+
+		/* Grid container styling */
+		.anime-grid-anime {
+		  display: grid;
+		  grid-template-columns: repeat(5, 1fr); /* Default: 5 cards in one row */
+		  gap: 20px;
+		  padding: 20px;
+		}
+
+		.anime-card-anime {
+		  background-color: #222;
+		  border-radius: 8px;
+		  overflow: hidden;
+		  text-align: center;
+		  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+		  transition: transform 0.3s ease;
+		}
+
+		.anime-card-anime:hover {
+		  transform: scale(1.05);
+		}
+
+		.anime-card-anime img {
+		  width: 100%;
+		  height: auto;
+		  display: block;
+		}
+
+		.anime-card-anime h3 {
+		  font-size: 1rem;
+		  padding: 10px;
+		}
+
+		/* Responsive grid: adjust to 2 columns for small screens */
+		@media (max-width: 768px) {
+		  .anime-grid-anime {
+		    grid-template-columns: repeat(2, 1fr); /* 2 cards in a row */
+		  }
+		  #edit-profile form{
+		  	flex-direction: column;
+		  }
+		  #edit-profile form input , button {
+		  	margin-top: 1em;
+		  }
+		}
+
+		@media (max-width: 480px) {
+		  .anime-grid-anime {
+		    grid-template-columns: 1fr; /* 1 card per row for very small screens */
+		  }
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<!-- nav bar -->
+	{% include 'b/nav.html' %}
+
+	<!-- profile section -->
+	<div style="display: flex; align-items: center; justify-content: center; width: 100%; margin-top: 1em;">
+		<img src="{{ user_profile.profile_pic.url }}" alt="Profile Picture" width="150" height="150">
+		&ensp;&ensp;&ensp;&ensp;
+		<h3>welcome , {{ user_profile.name }} </h3>
+		&ensp;
+		<button id="toggle-edit">edit</button>
+	</div>
+
+
+	<!-- profile edit  -->
+	<div id="edit-profile" style="display: none;">
+		<form method="post" action="{% url 'profile_edit' %}"
+	      enctype="multipart/form-data"
+	      style="display: flex; align-items: center; justify-content: center; width: 100%; margin-top: 1em;
+	      ">
+	    {% csrf_token %}
+	    <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+	    <input type="text" name="profile_edit" placeholder="Enter new name" required>
+	    <button type="submit">Edit Profile</button>
+	    </form>
+	</div>
+
+
+
+	<div style="display: flex; justify-content:center; margin-top: 1em;" >
+		<hr style="width: 80%; align-items: center;">
+	</div>
+
+
+	<!-- anime watchlist according to user -->
+
+	<section class="all-list-anime">
+		<h1>watchlist Anime</h1>
+		<div style="display: flex; justify-content:center; margin-top: 1em;" >
+			<form method="post" action="{% url 'remove_all_anime' %}" style="display: inline;">
+			    {% csrf_token %}
+			    <button type="submit">Remove All</button>
+			</form>
+	    </div>
+		<div class="anime-grid-anime">
+		{% for anime in anime_list %}
+		<!-- Anime Card 1 -->
+			
+			<div class="anime-card-anime">
+			<a href="{% url 'anime-detail' title=anime.anime.title %}" style="text-decoration: none; color: #fff;">
+			<img src="{{ anime.anime.picture.url }}" alt="Anime 1">
+			</a>
+			<h3>{{anime.anime.title}} </h3>
+			
+
+			<!-- actions -->
+			<div style="display: flex; justify-content: center;">
+
+				<form method="post" action="{% url 'remove_anime' %}">
+                {% csrf_token %}  
+                <input type="text" name="anime_id" value="{{anime.anime.id}}" required style="display: none;">
+                <button type="submit">remove</button>
+            	</form>
+
+
+			</div>
+
+			
+
+
+			</div>
+			
+		{% empty %}
+            <li>No anime found in your list.</li>
+        {% endfor %}
+
+		</div>
+	</section>
+
+
+
+	<script src="{% static 'js/profile-wishlist-edit.js' %}" ></script>
+
+
+</body>
+</html>
