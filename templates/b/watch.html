@@ -30,9 +30,14 @@
     </div>
      
     <!-- action buttons -->
-    <div style="display: flex;justify-content:space-between;margin-top:0.5em;">
-      <p>your are watching episode {{episode.episode_no}} </p>  
-      <button style="background-color: #ff78b6; border-style: none; border-radius: 4px; padding-left: 2px; padding-right: 2px; color: white;"  id="next-button">next</button>
+    <div style="display: flex;justify-content:space-between;margin-top:0.5em;" id="action">
+      <p>your are watching episode {{episode.episode_no}} </p> 
+
+      <div>
+          <button style="background-color: #ff78b6; border-style: none; border-radius: 4px; padding-left: 2px; padding-right: 2px; color: white;"  id="prev-button">prev</button> 
+        <button style="background-color: #ff78b6; border-style: none; border-radius: 4px; padding-left: 2px; padding-right: 2px; color: white;"  id="next-button">next</button>
+      </div>
+      
     </div>
   </div>
 </main>
@@ -57,6 +62,22 @@
   // Find the current episode in the list
   const currentEpisodeIndex = episodes.findIndex(episode => episode.episode_no == currentEpisodeNo);
 
+  const episodename = episodes[currentEpisodeIndex]?.name;
+  // Console log the episode name
+
+  // Function to hide/show action buttons based on episode name
+  function toggleActionButtons() {
+    const actionDiv = document.getElementById('action');
+    if (episodename && episodename.toLowerCase().includes('full')) {
+      actionDiv.style.display = 'none';
+    } else {
+      actionDiv.style.display = 'flex';
+    }
+  }
+
+  // Call the function on page load
+  toggleActionButtons();
+
   // Add event listener to the Next button
   document.getElementById('next-button').addEventListener('click', () => {
     if (currentEpisodeIndex !== -1 && currentEpisodeIndex + 1 < episodes.length) {
@@ -67,7 +88,23 @@
     } else {
 
       const next = document.getElementById('next-button')
-      next.style.display = "none";
+      // next.style.display = "none";
+      // alert('watched all episodes')   
+    }
+  });
+
+
+   // Add event listener to the Next button
+  document.getElementById('prev-button').addEventListener('click', () => {
+    if (currentEpisodeIndex !== -1 && currentEpisodeIndex + 1 < episodes.length) {
+      const nextEpisode = episodes[currentEpisodeIndex - 1];
+      const nextEpisodeUrl = `/watch/${animeTitle}/${nextEpisode.episode_no}/`;
+      // Redirect to the next episode URL in the same tab
+      window.location.href = nextEpisodeUrl;
+    } else {
+
+      const next = document.getElementById('prev-button')
+      // next.style.display = "none";
       // alert('watched all episodes')   
     }
   });
@@ -88,7 +125,7 @@
 
   // Autoplay the video (this allows autoplay functionality to remain enabled)
   player.on('play', () => {
-    console.log(`Playing Episode: ${currentEpisodeNo}`);
+    // console.log(`Playing Episode: ${currentEpisodeNo}`);
   });
 
 </script>
